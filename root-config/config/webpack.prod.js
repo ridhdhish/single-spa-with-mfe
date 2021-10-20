@@ -1,5 +1,5 @@
 const { merge } = require("webpack-merge");
-const path = require("path");
+var path = require("path");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const commonConfig = require("./webpack.common");
@@ -14,22 +14,11 @@ const prodConfig = {
   plugins: [
     new CleanWebpackPlugin(),
     new ModuleFederationPlugin({
-      name: "reactApp",
+      name: "root-config",
       filename: "remoteEntry.js",
-      exposes: {
-        "./ApplicationPage": "./src/App",
-      },
       shared: [
         {
           ...deps,
-          react: {
-            singleton: true,
-            requiredVersion: deps.react,
-          },
-          "react-dom": {
-            singleton: true,
-            requiredVersion: deps["react-dom"],
-          },
         },
       ],
     }),

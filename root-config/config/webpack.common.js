@@ -2,12 +2,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   resolve: {
-    extensions: [".js", ".tsx", ".jsx", ".ts"],
+    extensions: [".js"],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
       },

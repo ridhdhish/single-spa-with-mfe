@@ -6,30 +6,22 @@ const deps = require("../package.json").dependencies;
 const devConfig = {
   mode: "development",
   devServer: {
-    port: 8082,
+    port: 8080,
     historyApiFallback: {
       index: "index.html",
     },
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "reactApp",
-      filename: "remoteEntry.js",      
-      exposes: {
-        "./ApplicationPage": "./src/App",
-        // Expose your component/application here like above        
+      name: "root-config",
+      filename: "remoteEntry.js",
+      remotes: {
+        reactApp: "reactApp@http://localhost:8082/remoteEntry.js",
+        reactNavApp: "reactNavApp@http://localhost:8081/remoteEntry.js",
       },
       shared: [
         {
           ...deps,
-          react: {
-            singleton: true,
-            requiredVersion: deps.react,
-          },
-          "react-dom": {
-            singleton: true,
-            requiredVersion: deps["react-dom"],
-          },
         },
       ],
     }),
