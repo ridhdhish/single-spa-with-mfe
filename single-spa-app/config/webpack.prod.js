@@ -14,10 +14,10 @@ const prodConfig = {
   plugins: [
     new CleanWebpackPlugin(),
     new ModuleFederationPlugin({
-      name: "home",
+      name: "reactApp",
       filename: "remoteEntry.js",
       exposes: {
-        "./App": "./src/App",
+        "./ApplicationPage": "./src/App",
       },
       shared: [
         {
